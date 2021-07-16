@@ -215,6 +215,9 @@ class AppImpl extends React.Component<AppProps, AppState> {
     async componentDidMount() {
         this.unsubscribeChangeListener = store.subscribe(this.onStoreChange);
         this.queryFlags = parseQuery();
+        if (this.queryFlags["authcallback"]) {
+            pxt.auth.loginCallback(this.queryFlags);
+        }
         await this.initLocalizationAsync();
         await this.parseHashAsync();
     }
